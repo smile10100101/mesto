@@ -10,105 +10,105 @@
     <link rel="stylesheet" href="./pages/index.css">
   </head>
 
-  <body>
-    <div class="page">
-      <div class="page__container">
+  <body class="page">
+    <div class="page__container">
       
-        <header class="header">
-          <img class="header__logo" src="./images/header/header-logo.svg" lang="en" alt="Логотип Mesto">
-        </header>
+      <header class="header">
+        <img class="header__logo" src="./images/header/header-logo.svg" lang="en" alt="Логотип Mesto">
+      </header>
 
-        <main class="content">
+      <main class="content">
 
-          <section class="profile">
-            <div class="profile__container">
-              <img class="profile__avatar" src="./images/profile/Cousteau.jpg" alt="Аватар профиля">
-              <div class="profile__info">
-                <div class="profile__block">
-                  <h1 class="profile__name">Жак-Ив Кусто</h1>
-                  <button type="button" class="profile__edit-button" aria-label="Редактировать"></button>
-                </div>
-                <p class="profile__about">Исследователь океана</p>
+        <section class="profile">
+          <div class="profile__container">
+            <img class="profile__avatar" src="./images/profile/Cousteau.jpg" alt="Аватар профиля">
+            <div class="profile__info">
+              <div class="profile__block">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button type="button" class="profile__edit-button" aria-label="Редактировать"></button>
               </div>
+              <p class="profile__about">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__add-button" aria-label="Добавить"></button>
-          </section>
+          </div>
+          <button type="button" class="profile__add-button" aria-label="Добавить"></button>
+        </section>
 
-          <section class="elements" aria-label="Фотографии пользователя">
+        <section class="elements" aria-label="Фотографии пользователя">
 
-            <figure class="element">
-              <img src="./images/elements/karachaevsk.jpg" alt="Вид в районе города Карачаевск" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Карачаевск</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/karachaevsk.jpg" alt="Вид в районе города Карачаевск" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Карачаевск</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-            <figure class="element">
-              <img src="./images/elements/elbrus.jpg" alt="Вид на Эльбрус" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Гора Эльбрус</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/elbrus.jpg" alt="Вид на Эльбрус" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Гора Эльбрус</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-            <figure class="element">
-              <img src="./images/elements/dombay.jpg" alt="Вид на Домбай" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Домбай</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/dombay.jpg" alt="Вид на Домбай" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Домбай</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-            <figure class="element">
-              <img src="./images/elements/kolsky.jpg" alt="Вид на северное море" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Кольский полуостров</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/kolsky.jpg" alt="Вид на северное море" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Кольский полуостров</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-            <figure class="element">
-              <img src="./images/elements/altay.jpg" alt="Вид на горы, луга, озера" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Алтай</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/altay.jpg" alt="Вид на горы, луга, озера" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Алтай</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-            <figure class="element">
-              <img src="./images/elements/karelia.jpg" alt="Вид в реку" class="element__image">
-              <figcaption class="element__container">
-                <p class="element__subtitle">Карелия</p>
-                <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
-              </figcaption>
-            </figure>
+          <article class="element">
+            <img src="./images/elements/karelia.jpg" alt="Вид в реку" class="element__image">
+            <div class="element__container">
+              <h2 class="element__subtitle">Карелия</h2>
+              <button type="button" class="element__like-button" aria-label="Добавить в избранное"></button>
+            </div>
+          </article>
 
-          </section>
+        </section>
 
-        </main>
+      </main>
 
-        <footer class="footer">
-          <p class="footer__copyright" lang="en">© 2022 Mesto Russia</p>
-        </footer>
+      <footer class="footer">
+        <p class="footer__copyright" lang="en">© 2022 Mesto Russia</p>
+      </footer>
 
-        <div class="popup">
-          <form class="popup__container">
-              <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <div class="popup__inputs">
-                  <label>
-                      <input class="popup__input popup__input_name" type="text" name="name" value="Жак-Ив Кусто">
-                  </label>
-                  <label>
-                      <input class="popup__input popup__input_about" type="text" name="about" value="Исследователь океана">
-                  </label>
-              </div>
-              <button class="popup__submit-button">Сохранить</button>
+      <div class="popup">
+        <div class="popup__container">
+          <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="user">
+            <div class="popup__inputs">
+              <label>
+                <input class="popup__input popup__input_user_name" type="text" name="name" value="Жак-Ив Кусто">
+              </label>
+              <label>
+                <input class="popup__input popup__input_user_about" type="text" name="about" value="Исследователь океана">
+              </label>
+            </div>
+            <button class="popup__submit-button" type="submit">Сохранить</button>
           </form>
         </div>
-
       </div>
+
     </div>
     <script src="scripts/index.js"></script>
   </body>
