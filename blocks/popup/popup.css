@@ -5,6 +5,9 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, .5);
-    transition: 0.4s all;
-    display: none;
+    transition: visibility 0s, opacity 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
 }
