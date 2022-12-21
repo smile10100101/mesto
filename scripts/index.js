@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const elementsContainer = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#element-template');
 
@@ -35,7 +8,6 @@ const popupCloseButton = document.querySelector('.popup__close-button');
 const popupCloseButtonPlace = document.querySelector('.popup__close-button-place');
 const popupCloseButtonImg = document.querySelector('.popup__close-button-img');
 
-const popup = document.querySelector('.popup');
 const popupUser = document.querySelector('.popup_user');
 const popupPlace = document.querySelector('.popup_place');
 const popupImage = document.querySelector('.popup_image');
@@ -55,14 +27,6 @@ const popupImageLink = document.querySelector('.popup__place-img');
 const popupImageName = document.querySelector('.popup__title-img');
 
 
-const elementData = initialCards.map(function (item) {
-    return {
-        name: item.name,
-        link: item.link,
-    };
-});
-
-
 const createCard = (cardLink, cardName) => {
     const elementCard = elementTemplate.content.querySelector('.element').cloneNode(true);
   
@@ -80,7 +44,7 @@ const createCard = (cardLink, cardName) => {
       event.target.classList.toggle('element__like-button_active');
   });
 
-  elementCard.querySelector('.element__image').addEventListener('click', function () {
+  elementImage.addEventListener('click', function () {
       openPopup(popupImage);
 
       popupImageLink.src = cardLink;
@@ -97,7 +61,7 @@ const renderCard = (addCard) => {
 };
 
 
-elementData.forEach((item) => {
+initialCards.forEach((item) => {
     renderCard(createCard(item.link, item.name));   
 });
 
@@ -109,9 +73,9 @@ function openPopup(item) {
 };
 
 popupOpenUser.addEventListener('click', function() {
-    openPopup(popupUser);
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
+    openPopup(popupUser);
 });
 
 popupOpenPlace.addEventListener('click', function() {
