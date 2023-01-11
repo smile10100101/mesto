@@ -1,23 +1,10 @@
 .popup__place-img {
-    width: 100%;
-    max-width: 816px;
-    height: 540px;
-    margin: 0 0 10px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
     padding: 0;
     object-fit: cover;
-    border: none;
-    box-sizing: border-box;
-}
-
-@media screen and (max-width: 1024px) {
-    .popup__place-img {
-        width: 433px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .popup__place-img {
-        width: 240px;
-        height: 299px;
-    }
+    display: block;
+    align-self: center;
+    justify-self: center;
 }
