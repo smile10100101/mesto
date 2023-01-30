@@ -34,7 +34,7 @@ function openPopupUser() {
 function createCard(cardData) {
     const card = new Card(cardData, '#element-template');
 	const newCard = card.generateCard();
-    renderCard(newCard);
+    return newCard;
 }
 
 const renderCard = (card) => {
@@ -42,7 +42,7 @@ const renderCard = (card) => {
 };
 
 initialCards.forEach((card) => {
-    createCard(card);
+    renderCard(createCard(card));
 });
 
 
@@ -59,7 +59,7 @@ function handleCardFormSubmit (evt) {
   const cardName = titleInput.value;
   const cardLink = linkInput.value;
 
-  createCard({ name: cardName, link: cardLink });
+  renderCard(createCard({ name: cardName, link: cardLink }));
 
   closePopup(popupPlace);
 

@@ -1,4 +1,6 @@
+import { popupImage, popupImageLink, popupImageName } from './constants.js';
 import { openPopup } from './utils.js';
+
 
 export class Card {
     constructor(data, templateSelector) {
@@ -28,6 +30,7 @@ export class Card {
 
     _handleDelete() {
         this._element.remove();
+        this._element = null;
     }
 
     _handleLike() {
@@ -35,15 +38,11 @@ export class Card {
     }
 
     _handleImagePopup() {
-        const popupImage = document.querySelector('.popup_image');
-        const popupImageLink = document.querySelector('.popup__place-img');
-        const popupImageName = document.querySelector('.popup__title-img');
-
-        openPopup(popupImage);
-        
         popupImageLink.src = this._link;
         popupImageLink.alt = this._name;
-        popupImageName.textContent = this._name;  
+        popupImageName.textContent = this._name;
+
+        openPopup(popupImage);
     }
 
     generateCard() {

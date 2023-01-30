@@ -34,3 +34,6 @@ export const validationConfig = {
     errorClass: 'popup__input-error_visible'
 };
 
+export const popupImage = document.querySelector('.popup_image');
+export const popupImageLink = document.querySelector('.popup__place-img');
+export const popupImageName = document.querySelector('.popup__title-img');
