@@ -1,12 +1,13 @@
-import { popupImage, popupImageLink, popupImageName } from './constants.js';
-import { openPopup } from './utils.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { popupImage, popupImageLink, popupImageName } from '../utils/constants.js';
 
 
 export class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -38,11 +39,13 @@ export class Card {
     }
 
     _handleImagePopup() {
+        const popup = new PopupWithImage(popupImage);
+        popup.open();
+        popup.setEventListeners();
+
         popupImageLink.src = this._link;
         popupImageLink.alt = this._name;
         popupImageName.textContent = this._name;
-
-        openPopup(popupImage);
     }
 
     generateCard() {
