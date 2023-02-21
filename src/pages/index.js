@@ -1,6 +1,6 @@
 import { initialCards, validationConfig, cardsContainer, popupOpenUser, popupOpenPlace, 
     popupUser, popupPlace, popupImage, popupFormUser, nameInput, jobInput, nameProfile, 
-    jobProfile, popupFormPlace, titleInput, linkInput  } from '../utils/constants.js';
+    jobProfile, popupFormPlace } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -8,7 +8,6 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import './index.css';
-
 
 const cardList = new Section({
     items: initialCards,
@@ -22,18 +21,19 @@ cardList.renderItems();
 const popupWithImage = new PopupWithImage(popupImage);
 
 function handleCardClick(link, name) {
-    popupImage.open(link, name);
+    popupWithImage.open(link, name);
 };
 
-function createCard (cardData) {
-    const card = new Card({name: cardData.name, link: cardData.link}, '#element-template', handleCardClick)
+function createCard (data) {
+    const card = new Card({name: data.name, link: data.link}, '#element-template', handleCardClick)
     const newCard = card.generateCard();
     return newCard;
 };
 
 function openPopupUser() {
-    nameInput.value = nameProfile.textContent;
-    jobInput.value = jobProfile.textContent;
+    const infoObject = userInfo.getUserInfo();
+    nameInput.value = infoObject.name;
+    jobInput.value = infoObject.job;
     popupEditUser.open();
 };
 
@@ -41,6 +41,7 @@ function openPopupPlace() {
     popupAddPlaceCard.open();
     placeFormValidator.resetForm();
 }
+
 
 const userInfo = new UserInfo({name: nameProfile, job: jobProfile});
 
@@ -53,11 +54,12 @@ const popupEditUser = new PopupWithForm(popupUser,
 
 const popupAddPlaceCard = new PopupWithForm(popupPlace,
     { handleFormSubmit: (data) => {
-       const newCard = createCard(data, {name: titleInput.value, link: linkInput.value}); 
+       const newCard = createCard({name: data.title, link: data.link}); 
        cardList.addItem(newCard);
     }
   }
 );
+
 
 const userFormValidator = new FormValidator(validationConfig, popupFormUser);
 userFormValidator.enableValidation();
@@ -72,3 +74,4 @@ popupOpenPlace.addEventListener('click', openPopupPlace);
 popupEditUser.setEventListeners();
 popupAddPlaceCard.setEventListeners();
 popupWithImage.setEventListeners();
+
