@@ -1,8 +1,8 @@
 export class UserInfo {
 
-    constructor({name, job, avatar, _id}) {
+    constructor({name, about, avatar, _id}) {
         this._userName = name;
-        this._userJob = job;
+        this._userJob = about;
         this._avatar = avatar;
         this._id = _id;
     }
@@ -10,7 +10,7 @@ export class UserInfo {
     getUserInfo() {
         const userData = {
             name: this._userName.textContent,
-            job: this._userJob.textContent,
+            about: this._userJob.textContent,
             avatar: this._avatar.src
         }
         return userData;

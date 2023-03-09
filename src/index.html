@@ -7,16 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
+    <!--
     <link rel="stylesheet" href="./pages/index.css">
+    -->
   </head>
 
   <body class="page">
     <div class="page__container">
       
       <header class="header">
-         <img class="header__logo" src="./images/header/header-logo.svg" lang="en" alt="Логотип Mesto">
+        <img class="header__logo" src="<%=require('./images/header/header-logo.svg')%>" lang="en" alt="Логотип Mesto">
         <!--
-          <img class="header__logo" src="<%=require('./images/header/header-logo.svg')%>" lang="en" alt="Логотип Mesto">
+          <img class="header__logo" src="./images/header/header-logo.svg" lang="en" alt="Логотип Mesto">
         -->
       </header>
 
@@ -25,9 +27,9 @@
         <section class="profile">
           <div class="profile__container">
             <div class="profile__box">
-              <img class="profile__avatar" src="./images/profile/Cousteau.jpg" alt="Аватар профиля">
+              <img class="profile__avatar" src="<%=require('./images/profile/Cousteau.jpg')%>" alt="Аватар профиля">
               <!--
-                <img class="profile__avatar" src="<%=require('./images/profile/Cousteau.jpg')%>" alt="Аватар профиля">
+                <img class="profile__avatar" src="./images/profile/Cousteau.jpg" alt="Аватар профиля">
               -->
               <div class="profile__overlay"></div>
             </div>
@@ -38,8 +40,9 @@
               </div>
               <p class="profile__about">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__add-button" aria-label="Добавить"></button>
+            
           </div>
+          <button type="button" class="profile__add-button" aria-label="Добавить"></button>
         </section>
 
         <section class="elements" aria-label="Фотографии пользователя"></section>
@@ -57,7 +60,7 @@
         <img alt="" class="element__image">
         <div class="element__container">
           <h2 class="element__subtitle"></h2>
-          <div class="element__box"></div>
+          <div class="element__box">
             <button type="button" class="element__like-button"></button>
             <p class="element__like-box"></p>
           </div>
@@ -139,7 +142,10 @@
         </form>
       </div>
     </div>
-    <script type="module" src="./pages/index.js"></script>
+    <!--
+      <script type="module" src="./pages/index.js"></script>
+    -->
+    
   </body>
 
 </html>

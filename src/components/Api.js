@@ -1,4 +1,5 @@
 export class Api {
+
     constructor(config) {
         this.headers = config.headers;
         this.baseURL = config.baseURL;
@@ -53,7 +54,7 @@ export class Api {
             method: 'PATCH',
             body: JSON.stringify({
                 name: data.name, 
-                about: data.about,
+                about: data.about
             })
         })
         .then(res => this._checkServerResponse(res));

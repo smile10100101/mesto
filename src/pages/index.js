@@ -9,51 +9,52 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupDeleteForm } from '../components/PopupDeleteForm.js';
-/*
+
 import './index.css';
-*/
-const api = new Api(apiConfig);
+
 
 let userId;
 
-const cardList = new Section({
-  cards: initialCards,
-  renderer: (card) => {
-    cardList.addItem(createCard(card));
-  }
-}, cardsContainer);
+const api = new Api(apiConfig);
 
+api.getUserInfo()
+.then((res) => {
+   userInfo.getUserInfo(res);
+   nameInput.value = res.name;
+   jobInput.value = res.about;  
 
-const userInfo = new UserInfo({name: nameProfile, job: jobProfile, avatar: profileAvatar});
-
+})
+.catch((err) => {
+    console.log(err);
+});
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(responses => {
     const userData = responses[0];
-    const listCard = responses[1];
+    const cards = responses[1];
 
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
     userInfo.getUserId(userData._id);
 
     userId = userData._id;
-    listCard.renderItems(cardList);
+    cardList.renderItems(cards);
     })
    .catch((err) => {
         console.log(err);
     });
 
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+  }
+}, cardsContainer);
 
-const popupWithImage = new PopupWithImage(popupImage);
-
-function handleCardClick(link, name) {
-    popupWithImage.open(link, name);
-};
-
-function createCard (data) {
-    const card = new Card(data, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
-    const newCard = card.generateCard();
-    return newCard;
+function createCard (item) {
+  const card = new Card(item, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
+  const newCard = card.generateCard();
+  return newCard;
 };
 
 api.getCardList()
@@ -64,25 +65,14 @@ api.getCardList()
     console.log(err);
 });
 
+const popupWithImage = new PopupWithImage(popupImage);
 
-const popupEditUser = new PopupWithForm(popupUser,
-  { handleFormSubmit: (data) => {
-        popupEditUser.setButtonText('Сохранение...');
+function handleCardClick(link, name) {
+    popupWithImage.open(link, name);
+};
 
-        api.setUserInfo(data) 
-        .then(res => {
-        userInfo.setUserInfo(res, {name: nameInput, job: jobInput});
-        popupEditUser.close();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      popupEditUser.setButtonText('Сохранить')
-    })
-  }
-}
-);
+popupWithImage.setEventListeners();
+
 
 const popupAddPlaceCard = new PopupWithForm(popupPlace,
     { handleFormSubmit: (name, link) => {
@@ -104,6 +94,8 @@ const popupAddPlaceCard = new PopupWithForm(popupPlace,
     }
 );
 
+popupAddPlaceCard.setEventListeners();
+
 const popupDeleteUserCard = new PopupDeleteForm(popupDelete, card => {
     popupDeleteUserCard.setButtonText('Удаление...');
 
@@ -120,6 +112,8 @@ const popupDeleteUserCard = new PopupDeleteForm(popupDelete, card => {
   })
 } 
 );
+
+popupDeleteUserCard.setEventListeners();
 
 function handleCardDelete(card, cardID) {
   popupDeleteUserCard.open(card, cardID);
@@ -149,6 +143,29 @@ function handleCardLike(card) {
       }
 };
 
+const userInfo = new UserInfo({name: nameProfile, about: jobProfile, avatar: profileAvatar});
+
+const popupEditUser = new PopupWithForm(popupUser,
+  { handleFormSubmit: (data) => {
+        popupEditUser.setButtonText('Сохранение...');
+
+        api.setUserInfo(data) 
+        .then(res => {
+        userInfo.setUserInfo(res, {name: nameInput, about: jobInput});
+        popupEditUser.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupEditUser.setButtonText('Сохранить')
+    })
+  }
+}
+);
+
+popupEditUser.setEventListeners();
+
 const popupEditUserAvatar = new PopupWithForm(popupAvatar,
   { handleFormSubmit: (data) => {
       popupEditUserAvatar.setButtonText('Сохранение...');
@@ -167,16 +184,7 @@ const popupEditUserAvatar = new PopupWithForm(popupAvatar,
       }
   });
 
-api.getUserInfo()
-.then((res) => {
-   userInfo.getUserInfo(res);
-   nameInput.value = res.name;
-   jobInput.value = res.about;  
-
-})
-.catch((err) => {
-    console.log(err);
-});
+  popupEditUserAvatar.setEventListeners();
 
 
 const userFormValidator = new FormValidator(validationConfig, popupFormUser);
@@ -203,9 +211,3 @@ popupOpenAvatar.addEventListener('click', function() {
   popupEditUserAvatar.open();
   avatarFormValidator.resetForm();
 });
-
-popupEditUser.setEventListeners();
-popupAddPlaceCard.setEventListeners();
-popupWithImage.setEventListeners();
-popupDeleteUserCard.setEventListeners();
-popupEditUserAvatar.setEventListeners();
