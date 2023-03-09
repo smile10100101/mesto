@@ -9,24 +9,33 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupDeleteForm } from '../components/PopupDeleteForm.js';
-
 import './index.css';
-
 
 let userId;
 
+const userInfo = new UserInfo({name: nameProfile, about: jobProfile, avatar: profileAvatar});
+
+const cardList = new Section({
+  cards: initialCards,
+  renderer: (card) => {
+    cardList.addItem(createCard(card));
+  }
+}, cardsContainer);
+
+const popupWithImage = new PopupWithImage(popupImage);
+popupWithImage.setEventListeners();
+
+function handleCardClick(link, name) {
+    popupWithImage.open(link, name);
+};
+
+function createCard (item) {
+  const card = new Card(item, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
+  const newCard = card.generateCard();
+  return newCard;
+};
+
 const api = new Api(apiConfig);
-
-api.getUserInfo()
-.then((res) => {
-   userInfo.getUserInfo(res);
-   nameInput.value = res.name;
-   jobInput.value = res.about;  
-
-})
-.catch((err) => {
-    console.log(err);
-});
 
 Promise.all([api.getUserInfo(), api.getCardList()])
   .then(responses => {
@@ -44,19 +53,6 @@ Promise.all([api.getUserInfo(), api.getCardList()])
         console.log(err);
     });
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardList.addItem(createCard(item));
-  }
-}, cardsContainer);
-
-function createCard (item) {
-  const card = new Card(item, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
-  const newCard = card.generateCard();
-  return newCard;
-};
-
 api.getCardList()
   .then((res) => {
     cardList.renderItems(res);
@@ -65,14 +61,16 @@ api.getCardList()
     console.log(err);
 });
 
-const popupWithImage = new PopupWithImage(popupImage);
+api.getUserInfo()
+.then((res) => {
+   userInfo.getUserInfo(res);
+   nameInput.value = res.name;
+   jobInput.value = res.about;  
 
-function handleCardClick(link, name) {
-    popupWithImage.open(link, name);
-};
-
-popupWithImage.setEventListeners();
-
+})
+.catch((err) => {
+    console.log(err);
+});
 
 const popupAddPlaceCard = new PopupWithForm(popupPlace,
     { handleFormSubmit: (name, link) => {
@@ -93,7 +91,6 @@ const popupAddPlaceCard = new PopupWithForm(popupPlace,
       }
     }
 );
-
 popupAddPlaceCard.setEventListeners();
 
 const popupDeleteUserCard = new PopupDeleteForm(popupDelete, card => {
@@ -112,7 +109,6 @@ const popupDeleteUserCard = new PopupDeleteForm(popupDelete, card => {
   })
 } 
 );
-
 popupDeleteUserCard.setEventListeners();
 
 function handleCardDelete(card, cardID) {
@@ -143,8 +139,6 @@ function handleCardLike(card) {
       }
 };
 
-const userInfo = new UserInfo({name: nameProfile, about: jobProfile, avatar: profileAvatar});
-
 const popupEditUser = new PopupWithForm(popupUser,
   { handleFormSubmit: (data) => {
         popupEditUser.setButtonText('Сохранение...');
@@ -163,7 +157,6 @@ const popupEditUser = new PopupWithForm(popupUser,
   }
 }
 );
-
 popupEditUser.setEventListeners();
 
 const popupEditUserAvatar = new PopupWithForm(popupAvatar,
@@ -183,8 +176,7 @@ const popupEditUserAvatar = new PopupWithForm(popupAvatar,
         })
       }
   });
-
-  popupEditUserAvatar.setEventListeners();
+popupEditUserAvatar.setEventListeners();
 
 
 const userFormValidator = new FormValidator(validationConfig, popupFormUser);

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); 
 
 module.exports = {
@@ -9,8 +10,9 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     output: {
-        filename: "[name].[contenthash].js",
-        path: path.resolve(__dirname, 'build'),
+        filename: "main.js",
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '',
         clean: true
     },
     module: {
@@ -41,9 +43,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src', 'index.html')
         }),
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin()
     ],
     devServer: {
+        static: path.resolve(__dirname, 'dist'),
         port: 8080,
         open: true,
         hot: true,
