@@ -50,7 +50,6 @@ module.exports = {
         static: path.resolve(__dirname, 'dist'),
         port: 8080,
         open: true,
-        hot: true,
-        watchFiles: ['src/**/*.html']
+        compress: true   
     }
 }
