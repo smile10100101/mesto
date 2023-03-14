@@ -8,7 +8,6 @@ module.exports = {
     entry: {
         index: path.resolve(__dirname, 'src', 'pages', 'index.js')
     },
-    devtool: 'inline-source-map',
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, 'dist'),
@@ -51,5 +50,6 @@ module.exports = {
         port: 8080,
         open: true,
         compress: true   
-    }
+    },
+    devtool: 'eval-source-map'
 }

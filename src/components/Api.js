@@ -10,7 +10,7 @@ export class Api {
                  headers: this.headers,
                  method: 'POST',
                  body: JSON.stringify({
-                         name: item.name,
+                         name: item.title,
                          link: item.link,
                  })
          })

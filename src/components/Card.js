@@ -11,6 +11,13 @@ export class Card {
         this._ownerId = data.owner._id;
         this._isLike = false;
         this._likes = data.likes;
+
+        this._element = this._getTemplate();
+        this._cardImage = this._element.querySelector('.element__image');
+        this._cardName = this._element.querySelector('.element__subtitle');
+        this._likeButton = this._element.querySelector('.element__like-button');
+        this._trashButton = this._element.querySelector('.element__trash-button');
+        this._likesBox = this._element.querySelector('.element__like-box');
     }
 
     _getTemplate() {
@@ -59,13 +66,6 @@ export class Card {
     }
 
     generateCard() {
-        this._element = this._getTemplate();
-        this._cardImage = this._element.querySelector('.element__image');
-        this._cardName = this._element.querySelector('.element__subtitle');
-        this._likeButton = this._element.querySelector('.element__like-button');
-        this._trashButton = this._element.querySelector('.element__trash-button');
-        this._likesBox = this._element.querySelector('.element__like-box');
-        
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
         this._cardName.textContent = this._name;

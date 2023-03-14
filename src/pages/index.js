@@ -13,8 +13,6 @@ import './index.css';
 
 let userId;
 
-const userInfo = new UserInfo({name: nameProfile, about: jobProfile, avatar: profileAvatar});
-
 const cardList = new Section({
   cards: initialCards,
   renderer: (card) => {
@@ -22,15 +20,12 @@ const cardList = new Section({
   }
 }, cardsContainer);
 
-const popupWithImage = new PopupWithImage(popupImage);
-popupWithImage.setEventListeners();
-
 function handleCardClick(link, name) {
     popupWithImage.open(link, name);
 };
 
-function createCard (item) {
-  const card = new Card(item, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
+function createCard (data) {
+  const card = new Card(data, '#element-template', handleCardClick, handleCardDelete, handleCardLike, userId)
   const newCard = card.generateCard();
   return newCard;
 };
@@ -66,7 +61,6 @@ api.getUserInfo()
    userInfo.getUserInfo(res);
    nameInput.value = res.name;
    jobInput.value = res.about;  
-
 })
 .catch((err) => {
     console.log(err);
@@ -86,7 +80,7 @@ const popupAddPlaceCard = new PopupWithForm(popupPlace,
              console.log(err);
         })
          .finally(() => {
-             popupAddPlaceCard.setButtonText('Создать')
+             popupAddPlaceCard.setButtonText('Создать');
         })
       }
     }
@@ -138,6 +132,11 @@ function handleCardLike(card) {
           });
       }
 };
+
+const popupWithImage = new PopupWithImage(popupImage);
+popupWithImage.setEventListeners();
+
+const userInfo = new UserInfo({name: nameProfile, about: jobProfile, avatar: profileAvatar});
 
 const popupEditUser = new PopupWithForm(popupUser,
   { handleFormSubmit: (data) => {
