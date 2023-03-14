@@ -9,7 +9,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupDeleteForm } from '../components/PopupDeleteForm.js';
-import './index.css';
+// import './index.css';
 
 let userId;
 
